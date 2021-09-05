@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <header class="chessHeader">UNIQUE CHESS</header>
+  <div class="row">
+    <div class="offset-md-3 col-6">
+      <form #gridForm="ngForm" (ngSubmit)="submitGridSize(gridForm.form)">
+          <select class="form-control gridInput" name="gridSize" ngModel #gridSize="ngModel" required>
+            <option class="gridOption" value="" disabled selected hidden>
+              Select grid size
+            </option>
+            <option class="gridOption" *ngFor="let grid of grids" [value]="grid.id">
+              {{ grid.name }}
+            </option>
+          </select>
+          <button class="gridButton" [disabled]="!gridForm.valid">Submit</button>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="offset-md-3 col-6">
+      <div *ngFor="let grid of grids">
+        <div *ngIf="gridOne === grid.id && grid.grid2x2 === true">
+          <div class="grid-container-2x2">
+            <div class="grid-item" *ngFor="let box of grid.box" style.backgroundColor="{{ box.color }}">
+              <fa-icon [icon]="box.val"></fa-icon>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="gridTwo == grid.id && grid.grid3x3 === true">
+          <div class="grid-container-3x3">
+            <div class="grid-item" *ngFor="let box of grid.box" style.backgroundColor="{{ box.color }}">
+              <fa-icon [icon]="box.val"></fa-icon>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="gridThree == grid.id && grid.grid2x3 === true">
+          <div class="grid-container-2x3">
+            <div class="grid-item" *ngFor="let box of grid.box" style.backgroundColor="{{ box.color }}">
+              <fa-icon [icon]="box.val"></fa-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
